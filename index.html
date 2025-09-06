@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PP Group — Login</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="login-screen">
+    <div class="login-center">
+      <img src="/assets/logo-pp-original.png" alt="PP Group" class="login-logo" />
+      <div class="login-card">
+        <h2>Dados de acesso</h2>
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="ex: cliente@ppgroup.com" autocomplete="username" />
+        <label for="password">Palavra-passe</label>
+        <input id="password" type="password" placeholder="••••••••" autocomplete="current-password" />
+        <button id="btnLogin">Entrar</button>
+        <div id="loginMsg" class="login-msg" role="alert" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+ <script>
+  window.PP_API_BASE = "https://ppgroup-demo-api.onrender.com/api";
+</script>
+  <script src="/app.js"></script>
+</body>
+</html>
