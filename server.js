@@ -138,4 +138,6 @@ app.get('/api/checkups/:id/photos', auth, (req,res)=>{
 });
 
 app.use('/', express.static(path.join(__dirname,'..','client')));
+app.get('/', (req,res) => res.type('text').send('PP Group API OK'));
+
 app.listen(PORT, ()=> console.log('PP Group API a correr na porta', PORT));
