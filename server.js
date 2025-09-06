@@ -49,6 +49,21 @@ db.serialize(() => {
   )`);
 });
 
+// Auto-seed: cria utilizadores de teste se a tabela estiver vazia
+db.get('SELECT COUNT(*) AS c FROM users', [], (e, row) => {
+  if (row && row.c === 0) {
+    const bcrypt = require('bcryptjs');
+    const h = bcrypt.hashSync('senha123', 8);
+    const ins = db.prepare('INSERT INTO users(name,email,password,role) VALUES (?,?,?,?)');
+    ins.run('Ana Admin','admin@ppgroup.com',h,'admin');
+    ins.run('Guilherme Gestor','gestor@ppgroup.com',h,'gestor');
+    ins.run('Tiago Tecnico','tecnico@ppgroup.com',h,'tecnico');
+    ins.run('Clara Cliente','cliente@ppgroup.com',h,'cliente');
+    ins.finalize(() => console.log('✅ Auto-seed concluído'));
+  }
+});
+
+
 function tokenFor(u){ return jwt.sign({id:u.id,email:u.email,name:u.name,role:u.role}, JWT_SECRET, {expiresIn:'7d'}); }
 function auth(req,res,next){
   const h=req.headers.authorization||''; const t=h.split(' ')[1];
